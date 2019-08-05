@@ -1,20 +1,42 @@
-import {testFunc} from 'functions/testFunc';
+//генератор
 
-console.log('works');
-testFunc();
+function* idMaker() {
+    let index = 0;
+    while (index < 3)
+        yield index++;
+}
 
-var name = "";
+const gen = idMaker();
 
-var user = {
-    name: "Василий",
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen);
 
-    export: function () {
-        var ob = {
-            name: 'Me',
-            value: this
-        };
-        return ob;
+// функция с дефолтным аргументом функцией
+
+function withFunction(fn = function() {}) {
+    return fn;
+}
+
+console.log(withFunction());
+
+// статические методы
+
+class User {
+    static sayHi() {
+        console.log('hi');
     }
+}
+
+User.otherSayHi = function () {
+  User.sayHi();
 };
 
-user.export();
+const user = new User();
+
+User.otherSayHi();

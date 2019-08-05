@@ -50,7 +50,27 @@ function scripts() {
                     output: {
                         filename: 'index.js',
                         path: path.resolve(__dirname, options.scripts.dest)
-                    }
+                    },
+                    module: {
+                        rules: [
+                            {
+                                test: /\.(js)$/,
+                                exclude: /(node_modules)/,
+                                loader: 'babel-loader',
+                                query: {
+                                    presets: [
+                                        [
+                                            "@babel/preset-env",
+                                            {
+                                                useBuiltIns: "usage",
+                                                corejs: 3
+                                            }
+                                        ]
+                                    ],
+                                }
+                            }
+                        ]
+                    },
                 }
             )
         )
